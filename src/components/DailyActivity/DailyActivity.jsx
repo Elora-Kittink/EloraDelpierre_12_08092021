@@ -1,5 +1,7 @@
 import React from "react";
 
-const DailyActivity = () => {};
+const DailyActivity = () => {
+  return "DailyActivity";
+};
 
 export default DailyActivity;

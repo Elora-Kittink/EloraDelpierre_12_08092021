@@ -1,0 +1,23 @@
+header {
+  display: flex;
+  background-color: black;
+}
+
+.header_logo {
+  width: 178px;
+  height: 61px;
+  margin: 20px;
+}
+
+.header_nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header_nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+}

@@ -1,0 +1,28 @@
+.sideBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 117px;
+  height: 100%;
+  background-color: black;
+  padding-top: 260px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.sideBar_meditate,
+.sideBar_swim,
+.sideBar_bike,
+.sideBar_train {
+  width: 64px;
+  height: 64px;
+}
+
+.sideBar_copyright {
+  height: 138px;
+  width: 14px;
+  margin-top: 180px;
+}
