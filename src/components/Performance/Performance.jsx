@@ -1,7 +1,7 @@
 import React from "react";
 
 const Performance = () => {
-  return "Performance";
+  return "PerformancecRadarChart";
 };
 
 export default Performance;

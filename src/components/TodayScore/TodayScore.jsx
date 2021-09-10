@@ -1,7 +1,7 @@
 import React from "react";
 
 const TodayScore = () => {
-  return "TodayScore";
+  return "TodayScore RadialBarChart";
 };
 
 export default TodayScore;
