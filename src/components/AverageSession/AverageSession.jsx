@@ -38,7 +38,7 @@ const AverageSession = () => {
     <div className="average_session_graph">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart width={300} height={100} data={data}>
-          <XAxis dataKey="day" axisLine={false} />
+          <XAxis dataKey="day" axisLine={false} tick={{ stroke: "transparent" }} />
           <Line type="monotone" dataKey="sessionLength" stroke="#8884d8" strokeWidth={2} dot={false} />
           <Text textAnchor={null}></Text>
         </LineChart>
