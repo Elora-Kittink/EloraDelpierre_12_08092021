@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import "./DailyActivity.css";
 
-export default function DailyActivity() {
+export default function DailyActivity(props) {
   const data = [
     {
       day: 1,
@@ -41,6 +41,12 @@ export default function DailyActivity() {
     },
   ];
 
+  // const data = props.data;
+  // console.log(props);
+
+  // const kilogram = props.kilogram;
+  // const calories = props.calories;
+
   return (
     <div className="daily_activity_graph">
       <h2>Activité quotidienne</h2>
@@ -48,7 +54,8 @@ export default function DailyActivity() {
         <BarChart
           width={500}
           height={300}
-          data={data}
+          /*data={data}*/
+          data={props.data}
           margin={{
             top: 5,
             right: 30,
@@ -61,8 +68,8 @@ export default function DailyActivity() {
           <YAxis orientation="right" />
           <Tooltip />
           <Legend align="right" verticalAlign="top" />
-          <Bar dataKey="kilogram" fill="#282D30" barSize={7} radius={[5, 5, 0, 0]} />
-          <Bar dataKey="calories" fill="#E60000" barSize={7} radius={[5, 5, 0, 0]} />
+          <Bar name="Poids (kg)" dataKey="kilogram" fill="#282D30" barSize={7} radius={[5, 5, 0, 0]} />
+          <Bar name="Calories brûlées (kCal)" dataKey="calories" fill="#E60000" barSize={7} radius={[5, 5, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

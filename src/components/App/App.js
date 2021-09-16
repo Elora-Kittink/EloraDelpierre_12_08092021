@@ -1,5 +1,5 @@
 import { BrowserRouter as Router } from "react-router-dom";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import React, { Fragment } from "react";
 import Home from "../../pages/home/home.jsx";
 // import E404 from "../../pages/error404/error404";
@@ -18,17 +18,10 @@ const App = () => {
           <Header />
           <SideBar />
           <Switch>
-            <Route exact path="/" component={Home}></Route>
-            <Route path="/profile" component={"profile"}></Route>
-            <Route path="/settings" component={"settings"}></Route>
-            <Route path="/community" component={"community"}></Route>
-            <Route path="/user/:id"></Route>
-            <Route path="/user/:id/activity"></Route>
-            <Route path="/user/:id/average-sessions"></Route>
-            <Route path="/user/:id/today-score"></Route>
-            <Route path="/user/:id/activities"></Route>
-            <Route path="/user/:id/key-data"></Route>
-            {/* <Route path="*" component={E404}></Route> */}
+            <Route path="/user/:id" component={Home} exact></Route>
+            <Route path="*">
+              <Redirect to="/user/12" />
+            </Route>
           </Switch>
         </Router>
       </div>
