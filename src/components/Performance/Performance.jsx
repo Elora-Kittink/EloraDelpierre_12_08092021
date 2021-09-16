@@ -3,40 +3,13 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Responsi
 import "./Performance.css";
 
 const Performance = (props) => {
-  // const data = [
-  //   {
-  //     value: 80,
-  //     kind: 1,
-  //   },
-  //   {
-  //     value: 120,
-  //     kind: 2,
-  //   },
-  //   {
-  //     value: 140,
-  //     kind: 3,
-  //   },
-  //   {
-  //     value: 50,
-  //     kind: 4,
-  //   },
-  //   {
-  //     value: 200,
-  //     kind: 5,
-  //   },
-  //   {
-  //     value: 90,
-  //     kind: 6,
-  //   },
-  // ];
-  console.log(props.data);
+  const data = console.log(props.data);
   return (
     <div className="performance_graph">
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="50%" cy="50%" outerRadius="80%" data={props.data.data}>
           <PolarGrid radialLines={false} />
           <PolarAngleAxis dataKey="kind" />
-
           <Radar name="Mike" dataKey="value" fill="#FF0101" fillOpacity={0.6} />
         </RadarChart>
       </ResponsiveContainer>
