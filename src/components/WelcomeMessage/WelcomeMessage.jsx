@@ -1,13 +1,18 @@
 import React from "react";
 import "./WelcomeMessage.css";
+import PropTypes from "prop-types";
 
-const WelcomeMessage = (props) => {
+const WelcomeMessage = ({ userName }) => {
   return (
-    <div>
-      <h1>Bonjour {props.userName}</h1>
+    <div className="welcome_message">
+      <h1>Bonjour {userName}</h1>
       <p>Félicitations</p>
     </div>
   );
+};
+
+WelcomeMessage.propTypes = {
+  userName: PropTypes.string,
 };
 
 export default WelcomeMessage;

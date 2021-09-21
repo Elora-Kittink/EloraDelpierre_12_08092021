@@ -9,7 +9,14 @@ import "./home.css";
 import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from "../../data";
 
 const Home = () => {
-  const index = 0;
+  const urlSplited = window.location.pathname.split("/");
+  const id = urlSplited[2];
+  const index = USER_MAIN_DATA.findIndex((user) => {
+    return user.id.toString() === id;
+  });
+  console.log(USER_MAIN_DATA);
+  console.log(id);
+  console.log("index " + index);
   const cardData = USER_MAIN_DATA[index].keyData;
   const dailyActivityData = USER_ACTIVITY[index].sessions;
   const averageSessionData = USER_AVERAGE_SESSIONS[index].sessions;
@@ -18,7 +25,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <WelcomeMessage className="welcome_message" userName="Karl" />
+      <WelcomeMessage userName={USER_MAIN_DATA[index].userInfos.firstName} />
       <div className="graph_cards">
         <div className="graph">
           <DailyActivity data={dailyActivityData} />

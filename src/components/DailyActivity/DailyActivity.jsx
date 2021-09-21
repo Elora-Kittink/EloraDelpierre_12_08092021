@@ -1,45 +1,46 @@
 import React, { PureComponent } from "react";
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import PropTypes from "prop-types";
 import "./DailyActivity.css";
 
-export default function DailyActivity(props) {
-  const data = [
-    {
-      day: 1,
-      kilogram: 80,
-      calories: 240,
-    },
-    {
-      day: 2,
-      kilogram: 80,
-      calories: 220,
-    },
-    {
-      day: 3,
-      kilogram: 81,
-      calories: 280,
-    },
-    {
-      day: 4,
-      kilogram: 81,
-      calories: 290,
-    },
-    {
-      day: 5,
-      kilogram: 80,
-      calories: 160,
-    },
-    {
-      day: 6,
-      kilogram: 78,
-      calories: 162,
-    },
-    {
-      day: 7,
-      kilogram: 76,
-      calories: 390,
-    },
-  ];
+export default function DailyActivity({ data }) {
+  // const data = [
+  //   {
+  //     day: 1,
+  //     kilogram: 80,
+  //     calories: 240,
+  //   },
+  //   {
+  //     day: 2,
+  //     kilogram: 80,
+  //     calories: 220,
+  //   },
+  //   {
+  //     day: 3,
+  //     kilogram: 81,
+  //     calories: 280,
+  //   },
+  //   {
+  //     day: 4,
+  //     kilogram: 81,
+  //     calories: 290,
+  //   },
+  //   {
+  //     day: 5,
+  //     kilogram: 80,
+  //     calories: 160,
+  //   },
+  //   {
+  //     day: 6,
+  //     kilogram: 78,
+  //     calories: 162,
+  //   },
+  //   {
+  //     day: 7,
+  //     kilogram: 76,
+  //     calories: 390,
+  //   },
+  // ];
 
   // const data = props.data;
   // console.log(props);
@@ -50,12 +51,13 @@ export default function DailyActivity(props) {
   return (
     <div className="daily_activity_graph">
       <h2>Activité quotidienne</h2>
+
       <ResponsiveContainer width="100%" height="80%">
         <BarChart
           width={500}
           height={300}
           /*data={data}*/
-          data={props.data}
+          data={data}
           margin={{
             top: 5,
             right: 30,
@@ -75,3 +77,13 @@ export default function DailyActivity(props) {
     </div>
   );
 }
+
+DailyActivity.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      day: PropTypes.string,
+      kilogram: PropTypes.number,
+      calories: PropTypes.number,
+    })
+  ),
+};
