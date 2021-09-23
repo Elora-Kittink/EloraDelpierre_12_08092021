@@ -4,6 +4,13 @@ import PropTypes from "prop-types";
 import "./AverageSession.css";
 
 const AverageSession = ({ data }) => {
+  const days = { 1: "L", 2: "M", 3: "M", 4: "J", 5: "V", 6: "S", 7: "D" };
+
+  data = data.map((entry) => ({
+    day: days[entry.day],
+    sessionLength: entry.sessionLength,
+  }));
+
   return (
     <div className="average_session_graph">
       <h2>Durée moyenne des sessions</h2>

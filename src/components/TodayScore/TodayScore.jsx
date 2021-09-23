@@ -28,13 +28,13 @@ const TodayScore = ({ data }) => {
   );
 };
 
-TodayScore.propTypes = {
-  data: PropTypes.shape({
-    id: PropTypes.string,
-    userInfos: PropTypes.object,
-    todayScore: PropTypes.number,
-    keyData: PropTypes.object,
-  }),
-};
+// TodayScore.propTypes = {
+//   data: PropTypes.shape({
+//     id: PropTypes.string,
+//     userInfos: PropTypes.object,
+//     todayScore: PropTypes.number,
+//     keyData: PropTypes.object,
+//   }),
+// };
 
 export default TodayScore;

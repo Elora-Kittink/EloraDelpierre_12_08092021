@@ -4,49 +4,40 @@ import PropTypes from "prop-types";
 import "./DailyActivity.css";
 
 export default function DailyActivity({ data }) {
-  // const data = [
-  //   {
-  //     day: 1,
-  //     kilogram: 80,
-  //     calories: 240,
-  //   },
-  //   {
-  //     day: 2,
-  //     kilogram: 80,
-  //     calories: 220,
-  //   },
-  //   {
-  //     day: 3,
-  //     kilogram: 81,
-  //     calories: 280,
-  //   },
-  //   {
-  //     day: 4,
-  //     kilogram: 81,
-  //     calories: 290,
-  //   },
-  //   {
-  //     day: 5,
-  //     kilogram: 80,
-  //     calories: 160,
-  //   },
-  //   {
-  //     day: 6,
-  //     kilogram: 78,
-  //     calories: 162,
-  //   },
-  //   {
-  //     day: 7,
-  //     kilogram: 76,
-  //     calories: 390,
-  //   },
-  // ];
+  console.log(data);
+  // const dataDayModified = data.map((session) => {
+  //   const convertedDate = session.day.split("-");
+  //   session.day = convertedDate[2];
+  //   console.log(session.day);
+  //   console.log(session);
+  //   console.log(convertedDate[2]);
+  //   return session;
+  // });
+  // console.log(dataDayModified);
 
-  // const data = props.data;
-  // console.log(props);
+  /**
+   * description en anglais
+   * @param {object} session description du parametre
+   * @returns description de ce qui est retourné
+   */
 
-  // const kilogram = props.kilogram;
-  // const calories = props.calories;
+  const getDay = (session) => {
+    const convertedDate = session.day.split("-");
+
+    return parseInt(convertedDate[2], 10);
+  };
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`${payload[0].value}kg`}</p>
+          <p className="intro">{`${payload[1].value}kCal`}</p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="daily_activity_graph">
@@ -65,10 +56,10 @@ export default function DailyActivity({ data }) {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" />
+          <CartesianGrid strokeDasharray="3 3" vertical={false} />
+          <XAxis dataKey={getDay} />
           <YAxis orientation="right" />
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
           <Legend align="right" verticalAlign="top" />
           <Bar name="Poids (kg)" dataKey="kilogram" fill="#282D30" barSize={7} radius={[5, 5, 0, 0]} />
           <Bar name="Calories brûlées (kCal)" dataKey="calories" fill="#E60000" barSize={7} radius={[5, 5, 0, 0]} />

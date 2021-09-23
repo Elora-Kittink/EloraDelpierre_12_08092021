@@ -8,18 +8,21 @@ import Card from "../../components/Card/Card";
 import "./home.css";
 import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from "../../data";
 
-const Home = () => {
-  const urlSplited = window.location.pathname.split("/");
-  const id = urlSplited[2];
+const Home = (props) => {
+  console.log(USER_ACTIVITY);
+  // const urlSplited = window.location.pathname.split("/");
+  // const id = urlSplited[2];
+  const getId = props.match.params.id;
+  const id = parseInt(getId, 10);
   const index = USER_MAIN_DATA.findIndex((user) => {
-    return user.id.toString() === id;
+    return user.id === id;
   });
-  console.log(USER_MAIN_DATA);
+
   console.log(id);
-  console.log("index " + index);
   const cardData = USER_MAIN_DATA[index].keyData;
   const dailyActivityData = USER_ACTIVITY[index].sessions;
   const averageSessionData = USER_AVERAGE_SESSIONS[index].sessions;
+
   console.log(averageSessionData);
   console.log(dailyActivityData);
 
