@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import WelcomeMessage from "../../components/WelcomeMessage/WelcomeMessage";
 import DailyActivity from "../../components/DailyActivity/DailyActivity";
 import AverageSession from "../../components/AverageSession/AverageSession";
@@ -10,10 +10,15 @@ import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE 
 
 const Home = (props) => {
   console.log(USER_ACTIVITY);
-  // const urlSplited = window.location.pathname.split("/");
-  // const id = urlSplited[2];
+
+  const [userInfos, setUserInfos] = useState(null);
+
   const getId = props.match.params.id;
   const id = parseInt(getId, 10);
+  // useEffect(() => {
+  //   //requete avec fetch
+  //   //mettre a jour le state
+  // });
   const index = USER_MAIN_DATA.findIndex((user) => {
     return user.id === id;
   });

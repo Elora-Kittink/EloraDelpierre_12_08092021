@@ -5,15 +5,6 @@ import "./DailyActivity.css";
 
 export default function DailyActivity({ data }) {
   console.log(data);
-  // const dataDayModified = data.map((session) => {
-  //   const convertedDate = session.day.split("-");
-  //   session.day = convertedDate[2];
-  //   console.log(session.day);
-  //   console.log(session);
-  //   console.log(convertedDate[2]);
-  //   return session;
-  // });
-  // console.log(dataDayModified);
 
   /**
    * description en anglais
@@ -72,9 +63,9 @@ export default function DailyActivity({ data }) {
 DailyActivity.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      day: PropTypes.string,
-      kilogram: PropTypes.number,
-      calories: PropTypes.number,
+      day: PropTypes.string.isRequired,
+      kilogram: PropTypes.number.isRequired,
+      calories: PropTypes.number.isRequired,
     })
   ),
 };

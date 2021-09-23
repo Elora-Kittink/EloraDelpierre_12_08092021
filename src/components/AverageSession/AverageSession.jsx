@@ -6,6 +6,12 @@ import "./AverageSession.css";
 const AverageSession = ({ data }) => {
   const days = { 1: "L", 2: "M", 3: "M", 4: "J", 5: "V", 6: "S", 7: "D" };
 
+  /**
+   * description en anglais
+   * @param {object} session description du parametre
+   * @returns description de ce qui est retourné
+   */
+
   data = data.map((entry) => ({
     day: days[entry.day],
     sessionLength: entry.sessionLength,
@@ -28,8 +34,8 @@ const AverageSession = ({ data }) => {
 AverageSession.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      day: PropTypes.number,
-      sessionLength: PropTypes.number,
+      day: PropTypes.number.isRequired,
+      sessionLength: PropTypes.number.isRequired,
     })
   ),
 };
