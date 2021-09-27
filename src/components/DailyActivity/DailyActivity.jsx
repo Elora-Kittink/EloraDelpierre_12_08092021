@@ -1,15 +1,13 @@
-import React, { PureComponent } from "react";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import React from "react";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import PropTypes from "prop-types";
 import "./DailyActivity.css";
 
 export default function DailyActivity({ data }) {
-  console.log(data);
-
   /**
-   * description en anglais
-   * @param {object} session description du parametre
-   * @returns description de ce qui est retourné
+   * transforms the date of the format yyyy-mm-dd into the number of the day
+   * @param {object} session contains the day, kilograms and calories
+   * @returns returns a number corresponding to the day of the month
    */
 
   const getDay = (session) => {
@@ -18,7 +16,14 @@ export default function DailyActivity({ data }) {
     return parseInt(convertedDate[2], 10);
   };
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  /**
+   * description en anglais
+   * @param {boolean} sactive description du parametre
+   * @param {array} payload description du parametre
+   * @returns description de ce qui est retourné
+   */
+
+  const CustomTooltip = ({ active, payload }) => {
     if (active) {
       return (
         <div className="custom-tooltip">
@@ -38,7 +43,6 @@ export default function DailyActivity({ data }) {
         <BarChart
           width={500}
           height={300}
-          /*data={data}*/
           data={data}
           margin={{
             top: 5,
@@ -63,9 +67,9 @@ export default function DailyActivity({ data }) {
 DailyActivity.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      day: PropTypes.string.isRequired,
-      kilogram: PropTypes.number.isRequired,
-      calories: PropTypes.number.isRequired,
+      day: PropTypes.string,
+      kilogram: PropTypes.number,
+      calories: PropTypes.number,
     })
   ),
 };

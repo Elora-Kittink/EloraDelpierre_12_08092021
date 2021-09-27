@@ -12,7 +12,7 @@ const WelcomeMessage = ({ userName }) => {
 };
 
 WelcomeMessage.propTypes = {
-  userName: PropTypes.string,
+  userName: PropTypes.string.isRequired,
 };
 
 export default WelcomeMessage;

@@ -1,23 +1,20 @@
 import React from "react";
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from "recharts";
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from "recharts";
 import PropTypes from "prop-types";
 import "./Performance.css";
 
 const Performance = ({ data }) => {
-  console.log(data);
-  const kinds = data.kind;
-
   /**
-   * description en anglais
-   * @param {object} session description du parametre
-   * @returns description de ce qui est retourné
+   * transform the performance's numbers into the corresponding title
+   * @param {array} performance array of each performance
+   * @returns an array with updated kind
    */
 
-  data = data.data.map((entry) => ({
-    kind: kinds[entry.kind],
-    value: entry.value,
+  data = data.data.map((performance) => ({
+    kind: data.kind[performance.kind],
+    value: performance.value,
   }));
-
+  console.log(data);
   return (
     <div className="performance_graph">
       <ResponsiveContainer width="100%" height="100%">
