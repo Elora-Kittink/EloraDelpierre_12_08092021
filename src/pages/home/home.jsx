@@ -5,128 +5,134 @@ import AverageSession from "../../components/AverageSession/AverageSession";
 import Performance from "../../components/Performance/Performance";
 import TodayScore from "../../components/TodayScore/TodayScore";
 import Card from "../../components/Card/Card";
+import { getUserActivity, getUserAverageSession, getUserInfos, getUserPerformance } from "../../services/userService";
 import "./home.css";
-import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from "../../data";
 
 const Home = (props) => {
   const [userInfos, setUserInfos] = useState(null);
   const [userActivity, setUserActivity] = useState(null);
   const [userAverageSession, setUserAverageSession] = useState(null);
   const [userPerformance, setUserPerformance] = useState(null);
+  const [hasError, setHasError] = useState(false);
 
   const getId = props.match.params.id;
   const userId = parseInt(getId, 10);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/user/${userId}`)
-      .then((res) => {
-        return res.json();
-      })
+    getUserInfos(userId)
       .then((data) => {
-        setUserInfos(data);
+        if (data === undefined) {
+          setHasError(true);
+        } else {
+          setUserInfos(data);
+        }
+      })
+      .catch((error) => {
+        setHasError(true);
       });
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/user/${userId}/activity`)
-      .then((res) => {
-        return res.json();
-      })
+    getUserActivity(userId)
       .then((data) => {
-        setUserActivity(data);
+        if (data === undefined) {
+          setHasError(true);
+        } else {
+          setUserActivity(data);
+        }
+      })
+      .catch((error) => {
+        setHasError(true);
       });
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/user/${userId}/average-sessions`)
-      .then((res) => {
-        return res.json();
-      })
+    getUserAverageSession(userId)
       .then((data) => {
-        setUserAverageSession(data);
+        if (data === undefined) {
+          setHasError(true);
+        } else {
+          setUserAverageSession(data);
+        }
+      })
+      .catch((error) => {
+        setHasError(true);
       });
-  }, []);
+  }, [userId]);
+
+  useEffect(() => {
+    getUserPerformance(userId)
+      .then((data) => {
+        if (data === undefined) {
+          setHasError(true);
+        } else {
+          setUserPerformance(data);
+        }
+      })
+      .catch((error) => {
+        setHasError(true);
+      });
+  }, [userId]);
+
+  console.log("user infos ");
+  console.log(userInfos);
+  console.log("user activity ");
+  console.log(userActivity);
+  console.log("user average session ");
   console.log(userAverageSession);
-  useEffect(() => {
-    fetch(`http://localhost:3001/user/${userId}/performance`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setUserPerformance(data);
-      });
-  }, []);
+  console.log("user performance ");
+  console.log(userPerformance);
 
-  /**
-   * get the index of the user in data's array with his id in url
-   * @param {???} active  description du parametre/ Y a pas de paramètre?
-   * @returns the index of the user in data's array
-   */
-
-  // const getIndex = async (id) => {
-  //   console.log(userInfos);
-  //   const index = await userInfos.findIndex((user) => {
-  //     return user.id === id;
-  //   });
-  //   return index;
-  // };
-
-  // const cardData = userInfos[getIndex(userId)].keyData;
-
-  return (
-    <div className="home">
-      {userInfos && (
-        <WelcomeMessage
-          userName={
-            userInfos.data.userInfos.firstName
-          } /*userName={USER_MAIN_DATA[getIndex(userId)].userInfos.firstName}*/
-        />
-      )}
-      <div className="graph_cards">
-        <div className="graph">
-          {userActivity && (
-            <DailyActivity data={userActivity.data.sessions} /*data={USER_ACTIVITY[getIndex(userId)].sessions}*/ />
-          )}
-          {userAverageSession && (
-            <AverageSession
-              data={userAverageSession.data.sessions} /*data={USER_AVERAGE_SESSIONS[getIndex(userId)].sessions}*/
-            />
-          )}
-          {userPerformance && <Performance data={userPerformance.data} /*data={USER_PERFORMANCE[getIndex(userId)]}*/ />}
-          {userInfos && <TodayScore data={userInfos.data} /*data={USER_MAIN_DATA[getIndex(userId)]}*/ />}
-        </div>
-        <div className="cards">
-          {userInfos && (
-            <Card
-              name="Calories"
-              unit="kCal"
-              value={userInfos.data.keyData.calorieCount}
-              icon="/assets/calories-icon.png"
-            />
-          )}
-          {userInfos && (
-            <Card
-              name="Protéines"
-              unit="g"
-              value={userInfos.data.keyData.proteinCount}
-              icon="/assets/protein-icon.png"
-            />
-          )}
-          {userInfos && (
-            <Card
-              name="Glucides"
-              unit="g"
-              value={userInfos.data.keyData.carbohydrateCount}
-              icon="/assets/carbs-icon.png"
-            />
-          )}
-          {userInfos && (
-            <Card name="Lipides" unit="g" value={userInfos.data.keyData.lipidCount} icon="/assets/fat-icon.png" />
-          )}
+  if (hasError === true) {
+    return (
+      <div className="error">
+        <p className="error_message">Une erreur s'est produite</p>
+      </div>
+    );
+  } else {
+    return (
+      <div className="home">
+        {userInfos && <WelcomeMessage userName={userInfos.data.userInfos.firstName} />}
+        <div className="graph_cards">
+          <div className="graph">
+            {userActivity && <DailyActivity data={userActivity.data.sessions} />}
+            {userAverageSession && <AverageSession data={userAverageSession.data.sessions} />}
+            {userPerformance && <Performance data={userPerformance.data} />}
+            {userInfos && <TodayScore data={userInfos.data} />}
+          </div>
+          <div className="cards">
+            {userInfos && (
+              <Card
+                name="Calories"
+                unit="kCal"
+                value={userInfos.data.keyData.calorieCount}
+                icon="/assets/calories-icon.png"
+              />
+            )}
+            {userInfos && (
+              <Card
+                name="Protéines"
+                unit="g"
+                value={userInfos.data.keyData.proteinCount}
+                icon="/assets/protein-icon.png"
+              />
+            )}
+            {userInfos && (
+              <Card
+                name="Glucides"
+                unit="g"
+                value={userInfos.data.keyData.carbohydrateCount}
+                icon="/assets/carbs-icon.png"
+              />
+            )}
+            {userInfos && (
+              <Card name="Lipides" unit="g" value={userInfos.data.keyData.lipidCount} icon="/assets/fat-icon.png" />
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default Home;

@@ -2,9 +2,11 @@
   width: 258px;
   height: 263px;
   background-color: #ff0000;
+  border-radius: 5px;
 }
 
 h2 {
   font-size: 15px;
   color: white;
+  padding: 10px;
 }

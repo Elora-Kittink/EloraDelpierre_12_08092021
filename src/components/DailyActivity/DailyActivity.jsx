@@ -15,34 +15,33 @@ export default function DailyActivity({ data }) {
 
     return parseInt(convertedDate[2], 10);
   };
-
+  console.log(data);
   /**
-   * description en anglais
-   * @param {boolean} sactive description du parametre
-   * @param {array} payload description du parametre
-   * @returns description de ce qui est retourné
+   * Customize the tooltip to display the kilograms and calories when active
+   * @param {boolean} active calculate internally
+   * @param {array} payload data array were each object correspond to a Bar, calculated internally
+   * @returns a tooltip displaying the data of both bar (here kilograms and calories)
    */
 
   const CustomTooltip = ({ active, payload }) => {
     if (active) {
       return (
-        <div className="custom-tooltip">
-          <p className="label">{`${payload[0].value}kg`}</p>
-          <p className="intro">{`${payload[1].value}kCal`}</p>
+        <div style={{ backgroundColor: "#E60000", color: "white", padding: "5px" }}>
+          <p>{`${payload[0].value}kg`}</p>
+          <p>{`${payload[1].value}kCal`}</p>
         </div>
       );
     }
+
     return null;
   };
 
   return (
     <div className="daily_activity_graph">
-      <h2>Activité quotidienne</h2>
-
-      <ResponsiveContainer width="100%" height="80%">
+      <h2 className="daily_activity_title">Activité quotidienne</h2>
+      <ResponsiveContainer width="100%" height={250} margin={{ bottom: 0 }}>
         <BarChart
-          width={500}
-          height={300}
+          barSize={10}
           data={data}
           margin={{
             top: 5,
@@ -52,10 +51,21 @@ export default function DailyActivity({ data }) {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis dataKey={getDay} />
-          <YAxis orientation="right" />
+          <XAxis dataKey={getDay} tickLine={false} />
+          <YAxis
+            orientation="right"
+            axisLine={false}
+            tickLine={false}
+            tickCount={3}
+            padding={{ left: -15, right: -20 }}
+          />
           <Tooltip content={<CustomTooltip />} />
-          <Legend align="right" verticalAlign="top" />
+          <Legend
+            iconType="circle"
+            align="right"
+            verticalAlign="top"
+            wrapperStyle={{ top: -30, right: 10 }} /*style={{ position: "absolute", top: 0 }}*/
+          />
           <Bar name="Poids (kg)" dataKey="kilogram" fill="#282D30" barSize={7} radius={[5, 5, 0, 0]} />
           <Bar name="Calories brûlées (kCal)" dataKey="calories" fill="#E60000" barSize={7} radius={[5, 5, 0, 0]} />
         </BarChart>

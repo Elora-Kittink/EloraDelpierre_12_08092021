@@ -1,8 +1,17 @@
 .card {
   display: flex;
-  justify-content: space-between;
-  width: 258px;
+  justify-content: space-around;
+  width: 250px;
+  height: 120px;
   background-color: #fbfbfb;
+}
+
+.card_content {
+  padding-right: 10px;
+}
+
+.card_value {
+  font-size: 800;
 }
 
 .card img {
