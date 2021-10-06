@@ -11,9 +11,6 @@ import { UserInfos } from "../../models/userInfos";
 import { UserPerformance } from "../../models/userPerformance";
 import { UserAverageSession } from "../../models/userAverageSession";
 import { UserDailyActivity } from "../../models/userDailyActivity";
-// import { UserDailyActivity } from "../../models/userDailyActivity";
-// import { UserAverageSession } from "../../models/userAverageSession";
-// import { UserPerformance } from "../../models/userPerformance";
 
 const Home = (props) => {
   const [userInfos, setUserInfos] = useState(null);
