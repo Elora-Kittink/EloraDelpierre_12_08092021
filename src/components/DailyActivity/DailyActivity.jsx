@@ -15,7 +15,6 @@ export default function DailyActivity({ data }) {
 
     return parseInt(convertedDate[2], 10);
   };
-  console.log(data);
   /**
    * Customize the tooltip to display the kilograms and calories when active
    * @param {boolean} active calculate internally
@@ -36,10 +35,15 @@ export default function DailyActivity({ data }) {
     return null;
   };
 
+  const textStyle = { color: "#74798C", fontSize: "14px" };
+  const renderLegendStyle = (value) => {
+    return <span style={textStyle}>{value}</span>;
+  };
+
   return (
     <div className="daily_activity_graph">
       <h2 className="daily_activity_title">Activité quotidienne</h2>
-      <ResponsiveContainer width="100%" height={250} margin={{ bottom: 0 }}>
+      <ResponsiveContainer width="100%" max-height={250} height="100%" margin={{ bottom: 0 }}>
         <BarChart
           barSize={10}
           data={data}
@@ -62,9 +66,11 @@ export default function DailyActivity({ data }) {
           <Tooltip content={<CustomTooltip />} />
           <Legend
             iconType="circle"
+            iconSize={8}
             align="right"
             verticalAlign="top"
-            wrapperStyle={{ top: -30, right: 10 }} /*style={{ position: "absolute", top: 0 }}*/
+            wrapperStyle={{ top: -30, right: 10 }}
+            formatter={renderLegendStyle}
           />
           <Bar name="Poids (kg)" dataKey="kilogram" fill="#282D30" barSize={7} radius={[5, 5, 0, 0]} />
           <Bar name="Calories brûlées (kCal)" dataKey="calories" fill="#E60000" barSize={7} radius={[5, 5, 0, 0]} />

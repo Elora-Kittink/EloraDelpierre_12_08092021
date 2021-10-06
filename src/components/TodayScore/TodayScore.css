@@ -1,14 +1,18 @@
 .today_score_graph {
-  width: 260px;
-  height: 260px;
+  max-width: 260px;
+  max-height: 260px;
+  width: 100%;
+  height: 100%;
   background-color: #fbfbfb;
   position: relative;
 }
 
 .today_score {
   background-color: white;
-  width: 145px;
-  height: 145px;
+  max-width: 145px;
+  max-height: 145px;
+  width: 100%;
+  height: 100%;
   border-radius: 145px;
   position: absolute;
   top: 57px;
@@ -18,7 +22,7 @@
 
 .today_score_txt {
   text-align: center;
-  padding-top: 35px;
+  padding-top: 40px;
   font-weight: 800;
 }
 

@@ -7,11 +7,13 @@ const Card = ({ name, unit, value, icon }) => {
     <div className="card">
       <img src={icon} alt=""></img>
       <div className="card_content">
-        <p className="card_value">
+        <p className="card_value" style={{ fontWeight: 700 }}>
           {value}
           {unit}
         </p>
-        <p className="card_name">{name}</p>
+        <p className="card_name" style={{ color: "#74798C" }}>
+          {name}
+        </p>
       </div>
     </div>
   );

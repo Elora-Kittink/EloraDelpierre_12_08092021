@@ -7,6 +7,13 @@ import TodayScore from "../../components/TodayScore/TodayScore";
 import Card from "../../components/Card/Card";
 import { getUserActivity, getUserAverageSession, getUserInfos, getUserPerformance } from "../../services/userService";
 import "./home.css";
+import { UserInfos } from "../../models/userInfos";
+import { UserPerformance } from "../../models/userPerformance";
+import { UserAverageSession } from "../../models/userAverageSession";
+import { UserDailyActivity } from "../../models/userDailyActivity";
+// import { UserDailyActivity } from "../../models/userDailyActivity";
+// import { UserAverageSession } from "../../models/userAverageSession";
+// import { UserPerformance } from "../../models/userPerformance";
 
 const Home = (props) => {
   const [userInfos, setUserInfos] = useState(null);
@@ -24,7 +31,7 @@ const Home = (props) => {
         if (data === undefined) {
           setHasError(true);
         } else {
-          setUserInfos(data);
+          setUserInfos(new UserInfos(data));
         }
       })
       .catch((error) => {
@@ -38,7 +45,7 @@ const Home = (props) => {
         if (data === undefined) {
           setHasError(true);
         } else {
-          setUserActivity(data);
+          setUserActivity(new UserDailyActivity(data));
         }
       })
       .catch((error) => {
@@ -52,7 +59,7 @@ const Home = (props) => {
         if (data === undefined) {
           setHasError(true);
         } else {
-          setUserAverageSession(data);
+          setUserAverageSession(new UserAverageSession(data));
         }
       })
       .catch((error) => {
@@ -66,22 +73,13 @@ const Home = (props) => {
         if (data === undefined) {
           setHasError(true);
         } else {
-          setUserPerformance(data);
+          setUserPerformance(new UserPerformance(data));
         }
       })
       .catch((error) => {
         setHasError(true);
       });
   }, [userId]);
-
-  console.log("user infos ");
-  console.log(userInfos);
-  console.log("user activity ");
-  console.log(userActivity);
-  console.log("user average session ");
-  console.log(userAverageSession);
-  console.log("user performance ");
-  console.log(userPerformance);
 
   if (hasError === true) {
     return (
@@ -92,41 +90,36 @@ const Home = (props) => {
   } else {
     return (
       <div className="home">
-        {userInfos && <WelcomeMessage userName={userInfos.data.userInfos.firstName} />}
+        {userInfos && <WelcomeMessage userName={userInfos.userInfos.firstName} />}
         <div className="graph_cards">
           <div className="graph">
-            {userActivity && <DailyActivity data={userActivity.data.sessions} />}
-            {userAverageSession && <AverageSession data={userAverageSession.data.sessions} />}
-            {userPerformance && <Performance data={userPerformance.data} />}
-            {userInfos && <TodayScore data={userInfos.data} />}
+            {userActivity && <DailyActivity data={userActivity.sessions} />}
+            {userAverageSession && <AverageSession sessions={userAverageSession.sessions} />}
+            {userPerformance && <Performance data={userPerformance} />}
+            {userInfos && <TodayScore todayScore={userInfos.todayScore} />}
           </div>
           <div className="cards">
             {userInfos && (
               <Card
                 name="Calories"
                 unit="kCal"
-                value={userInfos.data.keyData.calorieCount}
+                value={userInfos.keyData.calorieCount}
                 icon="/assets/calories-icon.png"
               />
             )}
             {userInfos && (
-              <Card
-                name="Protéines"
-                unit="g"
-                value={userInfos.data.keyData.proteinCount}
-                icon="/assets/protein-icon.png"
-              />
+              <Card name="Protéines" unit="g" value={userInfos.keyData.proteinCount} icon="/assets/protein-icon.png" />
             )}
             {userInfos && (
               <Card
                 name="Glucides"
                 unit="g"
-                value={userInfos.data.keyData.carbohydrateCount}
+                value={userInfos.keyData.carbohydrateCount}
                 icon="/assets/carbs-icon.png"
               />
             )}
             {userInfos && (
-              <Card name="Lipides" unit="g" value={userInfos.data.keyData.lipidCount} icon="/assets/fat-icon.png" />
+              <Card name="Lipides" unit="g" value={userInfos.keyData.lipidCount} icon="/assets/fat-icon.png" />
             )}
           </div>
         </div>

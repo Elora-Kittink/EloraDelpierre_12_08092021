@@ -4,3 +4,9 @@
 .userName {
   color: red;
 }
+
+@media screen and (max-width: 1024px) {
+  .welcome_message {
+    margin-left: 30px;
+  }
+}

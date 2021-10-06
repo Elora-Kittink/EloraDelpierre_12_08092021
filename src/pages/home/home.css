@@ -13,11 +13,29 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 850px;
+  max-width: 850px;
+  width: 100%;
+  margin-right: 10px;
 }
 
 .cards {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 1024px) {
+  .home {
+    margin-left: 80px;
+  }
+
+  .graph {
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .graph_cards {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }

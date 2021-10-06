@@ -3,7 +3,7 @@ import { LineChart, Line, XAxis, ResponsiveContainer, Text, Tooltip } from "rech
 import PropTypes from "prop-types";
 import "./AverageSession.css";
 
-const AverageSession = ({ data }) => {
+const AverageSession = ({ sessions }) => {
   const days = { 1: "L", 2: "M", 3: "M", 4: "J", 5: "V", 6: "S", 7: "D" };
 
   /**
@@ -12,14 +12,20 @@ const AverageSession = ({ data }) => {
    */
 
   const formatedDays = () => {
-    return data.map((entry) => ({
-      day: days[entry.day],
-      sessionLength: entry.sessionLength,
+    return sessions.map((session) => ({
+      day: days[session.day],
+      sessionLength: session.sessionLength,
     }));
   };
 
+  /**
+   * Customize the tooltip to display the average time when active
+   * @param {boolean} active calculate internally
+   * @param {array} payload data array were each object correspond to a Bar, calculated internally
+   * @returns a tooltip displaying the data of the line (here minutes)
+   */
+
   const CustomTooltip = ({ active, payload }) => {
-    console.log(payload);
     if (active) {
       return (
         <div style={{ backgroundColor: "white", color: "black", padding: "1px" }}>
@@ -33,15 +39,29 @@ const AverageSession = ({ data }) => {
 
   return (
     <div className="average_session_graph">
-      <h2>Durée moyenne des sessions</h2>
-      <ResponsiveContainer width="100%" height={220}>
-        <LineChart width={300} height={100} data={formatedDays()}>
-          <XAxis dataKey="day" axisLine={false} tickSize="0" />
-          <Line type="basis" dataKey="sessionLength" stroke="white" strokeWidth={2} dot={false} />
+      <h2 style={{ padding: 10, color: "rgba(255, 255, 255, .5)", fontWeight: 400 }}>Durée moyenne des sessions</h2>
+      <ResponsiveContainer width="100%" height="80%" style={{ padding: 10 }}>
+        <LineChart max-width={300} max-height={100} data={formatedDays()}>
+          <XAxis
+            dataKey="day"
+            axisLine={false}
+            tickSize="0"
+            tick={{ color: "white" }}
+            style={{ padding: 10, color: "white" }}
+          />
+          <Line
+            type="basis"
+            dataKey="sessionLength"
+            stroke="white"
+            strokeWidth={2}
+            dot={false}
+            style={{ padding: 10, color: "white" }}
+          />
           <Text textAnchor={null}></Text>
           <Tooltip cursor={false} content={<CustomTooltip />} />
         </LineChart>
       </ResponsiveContainer>
+      {/* color: "rgba(255, 255, 255, .5)" */}
     </div>
   );
 };

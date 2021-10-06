@@ -5,10 +5,10 @@ import PropTypes from "prop-types";
 const WelcomeMessage = ({ userName }) => {
   return (
     <div className="welcome_message">
-      <h1>
+      <h1 style={{ fontSize: 40 }}>
         Bonjour <span className="userName">{userName}</span>
       </h1>
-      <p>Félicitations ! Vous avez explosé vos objectifs hier 👏🏼</p>
+      <p style={{ fontWeight: 600 }}>Félicitations ! Vous avez explosé vos objectifs hier 👏🏼</p>
     </div>
   );
 };

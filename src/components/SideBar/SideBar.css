@@ -26,3 +26,9 @@
   width: 14px;
   margin-top: 180px;
 }
+
+@media screen and (max-width: 1024px) {
+  .sideBar {
+    width: 70px;
+  }
+}

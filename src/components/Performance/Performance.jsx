@@ -16,9 +16,9 @@ const Performance = ({ data }) => {
   }));
 
   return (
-    <div className="performance_graph">
-      <ResponsiveContainer width="80%" height="80%" style={{ margin: 10 }}>
-        <RadarChart cx="50%" cy="50%" outerRadius="90%" data={data}>
+    <div className="performance_graph" style={{ padding: 10 }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <RadarChart cx="50%" cy="50%" data={data}>
           <PolarGrid radialLines={false} />
           <PolarAngleAxis dataKey="kind" stroke="#FFFFFF" tick={{ fill: "#FFFFFF", fontSize: 12 }} tickLine={false} />
           <Radar name="Mike" dataKey="value" fill="#FF0101" fillOpacity={0.6} />
